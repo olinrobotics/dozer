@@ -1,36 +1,31 @@
 int ledPin = 13;
-int ledValue = LOW;
+bool ledValue = LOW;
 int buttonPin = 2;
-int buttonValue = HIGH;
+bool buttonValue;
 unsigned long currentMillis; //tracks millis
 unsigned long previousMillis = 0; //tracks millis
-unsigned long interval = 1000; //interval for blinking
-unsigned long buttonpress = 0; //stores time button was presse
+unsigned int interval = 1000; //interval for blinking
 
 void setup() {
   // put your setup code here, to run once:
   pinMode(ledPin, OUTPUT);
-  pinMode(buttonPin, INPUT);
+  pinMode(buttonPin, INPUT); //button will have to be an interupt. button bouncing. button held down for a certain amount of time to change state.
 }
 
   
 void loop() {
-buttonValue=digitalRead(buttonPin);//outputs either high or low if button is pressed or not
-ledValue=digitalRead(ledPin);
-if (buttonValue==LOW){  
-  if (blinking==false){
-    bool blinking=true;}
+currentMillis=millis();
+buttonValue=digitalRead(buttonPin);//outputs either high or low if button is pressed or not- yes is 5V no is 0V
+if (buttonValue==LOW){  //if button is pressed
+  if (blinking()==false){  //if blinking is off
+    bool blinking=true;} // start blinking
   else {
-    bool blinking=false; }
+    bool blinking=false; } //stop blinking
 }
 }
 bool blinking(){
     if(currentMillis-previousMillis>interval){
-    previousMillis-currentMillis;
-    if(ledValue==LOW){
-      ledValue=HIGH;}
-    else {
-      ledValue=LOW;}
-  digitalWrite(ledPin, ledValue);
-  }
-}
+      ledValue=!ledValue;
+      previousMillis=millis();
+      digitalWrite(ledPin, ledValue);
+  }}
