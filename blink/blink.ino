@@ -24,8 +24,8 @@ if (buttonValue==LOW){  //if button is pressed
 }
 }
 bool blinking(){
-    if(currentMillis-previousMillis>interval){
-      ledValue=!ledValue;
-      previousMillis=millis();
+    if(currentMillis-previousMillis>interval){ //if time has exceeded the interval
+      ledValue=!ledValue; //make led turn on if off and off if on
+      previousMillis=millis(); //resets previous millis to create a new time interval right when the new led state has started
       digitalWrite(ledPin, ledValue);
   }}
